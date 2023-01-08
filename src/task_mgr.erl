@@ -11,7 +11,7 @@ order_tasks(Data) ->
   Tasks = maps:get(<<"tasks">>, Data, []),
   Res = lists:foldl(fun(Task, FinAcc) ->
                         case maps:get(<<"requires">>, Task, []) of
-                          [] ->  [Task];
+                          [] ->  [Task | FinAcc];
                           Requires  -> get_needed_tasks(Tasks, Task, Requires, FinAcc)
                         end
                     end, [], Tasks),

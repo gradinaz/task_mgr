@@ -24,6 +24,9 @@ start() ->
 stop() ->
   application:stop(task_mgr).
 
+get_http_port() ->
+  application:get_env(ad_lm, http_port, 8084).
+
 %%%===================================================================
 %%% Application callbacks
 %%%===================================================================
@@ -54,7 +57,7 @@ start(_StartType, _StartArgs) ->
   Middlewares = [cowboy_router, cowboy_handler],
 
 
-  {ok, _} = cowboy:start_clear(task_mgr_http, [{port, 8084}],
+  {ok, _} = cowboy:start_clear(task_mgr_http, [{port, get_http_port()}],
     #{env => #{dispatch => RestDispatch},  middlewares => Middlewares}),
 
   task_mgr_sup:start_link().
