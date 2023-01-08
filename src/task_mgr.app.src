@@ -1,0 +1,13 @@
+{application, task_mgr,
+  [
+    {description, "Task maganer"},
+    {vsn, "1"},
+    {registered, []},
+    {applications, [
+      kernel,
+      stdlib,
+      jsone,
+      cowboy
+    ]},
+    {mod, {task_mgr_app, []}}
+]}.
