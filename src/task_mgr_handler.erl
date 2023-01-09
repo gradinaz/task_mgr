@@ -34,7 +34,7 @@ post_json(InitReq, State) ->
           prepare_response(ScriptBin, Req, State);
       false ->
         OrderedTasks = task_mgr:order_tasks(Json),
-        prepare_response(OrderedTasks, Req, State)
+        prepare_response(#{<<"tasks">> => OrderedTasks}, Req, State)
     end
   end).
 
